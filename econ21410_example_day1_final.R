@@ -112,7 +112,7 @@ p.x    <- runif(Time,min=2,max=5)
 p.y    <- runif(Time,min=2,max=5)
 
 
-UtilHard <- function(x, alpha = .3, gamma = .5, util.type = "cobb", p.x = p.x, p.y = p.y, M=M, beta = .99, Time= Time) {
+UtilHard <- function(x, alpha = .3, gamma = .5, util.type = "cobb", p.x = p.x, p.y = p.y, M=M, beta = .95, Time= Time) {
   # Calculates the utility given xt and yt for T periods
   #
   # Args: x = units of the two goods consumed. 
@@ -136,7 +136,7 @@ UtilHard <- function(x, alpha = .3, gamma = .5, util.type = "cobb", p.x = p.x, p
   }
 }
 
-BudgetConstHard <- function(x, M, p.x = p.x, beta = .99, Time=Time, p.y = p.y, alpha = .3, gamma = .5, util.type = "cobb") {
+BudgetConstHard <- function(x, M, p.x = p.x, beta = .95, Time=Time, p.y = p.y, alpha = .3, gamma = .5, util.type = "cobb") {
   #Calculates if the budget constraint holds for a given bundle, prices, and income
   #
   #Args: x is a list of x and y quantities. p.x is price of x[1] p.y is price of x[2]
@@ -151,7 +151,7 @@ BudgetConstHard <- function(x, M, p.x = p.x, beta = .99, Time=Time, p.y = p.y, a
     stop("Argument x must have dimension 2")
   surplus = M
   for (t in 1:Time)
-    surplus = surplus - ((1/beta)^(t-1)) * (p.x[t] * x[t,1] + p.y[t] * x[t,2])
+    surplus = surplus - (beta^(t-1)) * (p.x[t] * x[t,1] + p.y[t] * x[t,2])
   return(  surplus)
 }
 
