@@ -20,7 +20,7 @@ set.seed(111)
 #libraries
 library(nloptr)
 library(Rsolnp)
-library(ggplot2)
+
 
 #==================
 # Section 1: The easy problem:
