@@ -1,0 +1,111 @@
+% Selection Modesl for computational Economics
+%
+%
+
+%%% TEX SETUP
+\documentclass{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath} % Provides miscellaneous improvements in math formulas
+\usepackage{amssymb} % Provides more math symbols
+\usepackage{bm} % Provides more bold math symbols
+\usepackage[margin = 1in]{geometry} % Makes adjustments to page dimensions easier
+\setlength{\parskip}{\bigskipamount}
+\setlength{\parindent}{0pt}
+\synctex=-1
+\usepackage{enumerate} % Makes writing lists easier
+\usepackage{graphicx} % Allows the incorporation of graphics into the document
+\usepackage{cancel} % Allows you to write cancellated symbols
+\usepackage{amsthm} % Allows easier manipulation of theorem environments
+\usepackage{setspace} % Allows finer control over line-spacing
+\usepackage{microtype} % Makes the text look better
+\usepackage[sort,round]{natbib} % Allows for cleaner citations (sort option means that multiple citations will be sorted as they appear in the references section
+\usepackage{booktabs} %helps make beautiful latex tables.
+\usepackage{framed}
+\usepackage{color}
+\usepackage[buttonsize=1em]{animate}
+\usepackage[normalem]{ulem}
+
+%% NEW COMMANDS
+\newcommand{\xxx}[1]{\textcolor{red}{XXX #1 XXX}}
+\newcommand{\solution}[2][noshow]{         % Replace "show" with any other word to hide solutions.
+    \ifthenelse{ \equal{#1}{show} }{ \textcolor{blue}{#2}}{}} % THIS FUNCTION LETS YOU WRITE IN SOLUTIONS BUT HIDE THEM WHEN RENDERING (SOLUTIONS CAN"T INCLUDE KNITR CALLS, SEE BELOW FOR HOW TO HIDE THOSE)
+
+
+%%% KNITR SETUP %%%
+<<setup, include=FALSE, cache=FALSE>>=
+# set global chunk options
+library(knitr)
+setwd(".")
+opts_chunk$set(fig.path='knitrfigures/', fig.align='center', fig.show='hold', fig.width=6, fig.height=6 )
+options(replace.assign=TRUE,width=90)
+read_chunk('example_Knitr.R')
+@
+<<code_part1, include=FALSE, cache=FALSE, echo=FALSE, eval=TRUE>>=
+@
+
+
+
+\title{Econ 21410 - Example Knitr File}
+\author{John Eric Humphries\footnote{Please email johneric@uchicago.edu and obrowne@uchicago.edu if you have questions.}}
+\begin{document} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\maketitle
+
+This file provides a working example of using Knitr where all of your R code is saved in an external file rather than "in line" in the .Rnw file. To generate this pdf, you need the "example\_Knitr.R" and "example\_Knitr.Rnw" files together in the same directory.
+
+
+\section{Running the first bit of code.}
+
+Suppose that the first thing I want to do is run some code to "set up" my data, for example:
+ <<code_part0, include=TRUE, cache=FALSE, echo=TRUE, eval=TRUE>>=
+@
+
+Note that t ran everything between "\#\# @knitr code\_part0" and "\#\# @knitr code\_part1".
+
+But maybe, I do not want to print this code to the pdf, but just run it, en that case, I would set "echo" and "eval" to false like this (note you will need to open up the example\_Knitr.Rnw file to see the actual code):
+
+ <<code_part0, include=TRUE, cache=FALSE, echo=FALSE, eval=FALSE>>=
+@
+
+(which runs the same code as above, but does not display the code or the output.)
+
+\section{Generate Data}
+Quickly generating some data (and displaying the code)
+<<code_part1, include=TRUE, cache=FALSE, echo=TRUE, eval=TRUE>>=
+@
+
+
+\section{Performing some calculations.}
+Next I want to show and actually calculate some numbers in code\_part1 which I can do with
+
+<<code_part2, include=TRUE, cache=FALSE, echo=TRUE, eval=TRUE>>=
+@
+If I only wanted to show the code I could do:
+<<code_part2, include=TRUE, cache=FALSE, echo=TRUE, eval=FALSE>>=
+@
+If I only wanted to show results I could do:
+<<code_part2, include=TRUE, cache=FALSE, echo=FALSE, eval=TRUE>>=
+@
+
+I can also return specific numbers in the middle of the text such as $c = \Sexpr{c}$ (see the .Rnw file to see how this is done).
+
+\section{Regression and making a table}
+Next, I will run some regression code and print a summary of the regression results to screen.
+<<code_part3, include=TRUE, cache=FALSE, echo=TRUE, eval=TRUE>>=
+@
+
+But what if I wanted to show the results as a nice latex table? The package "xtable" will do this for us quickly with the command:
+<<code_part4, include=TRUE, cache=FALSE, echo=TRUE, eval=TRUE, results="asis">>=
+@
+
+If I did not want to show any R output, I would just run:
+<<code_part4, include=TRUE, cache=FALSE, echo=FALSE, eval=TRUE, results="asis">>=
+@
+
+
+\section{An example plot}
+If I wanted to add a plot (but no R code), I can run
+<<code_part5, include=TRUE, cache=FALSE, echo=FALSE, eval=TRUE, fig.width=4, fig.height=4 >>=
+@
+
+\end{document}
