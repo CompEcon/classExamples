@@ -24,6 +24,7 @@
 \usepackage{color}
 \usepackage[buttonsize=1em]{animate}
 \usepackage[normalem]{ulem}
+\usepackage{verbatim} % Lets me include a .R file without dealing with formatting
 
 %% NEW COMMANDS
 \newcommand{\xxx}[1]{\textcolor{red}{XXX #1 XXX}}
@@ -107,5 +108,9 @@ If I did not want to show any R output, I would just run:
 If I wanted to add a plot (but no R code), I can run
 <<code_part5, include=TRUE, cache=FALSE, echo=FALSE, eval=TRUE, fig.width=4, fig.height=4 >>=
 @
+
+\section{Including the whole code}
+Using the verbatim package for \LaTeX, I can also print my whole code at the end of my pdf (which is convenient for grading:)
+\verbatiminput{example_Knitr.R}
 
 \end{document}
